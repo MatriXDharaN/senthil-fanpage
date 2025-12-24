@@ -1,0 +1,160 @@
+* Achievement section */
+
+/* SECTION */
+.achievements {
+  padding: 80px 20px;
+  background: #f4f6f9;
+}
+
+.achievements h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 60px;
+}
+
+/* CARD */
+.achievement-list {
+  max-width: 900px; 
+   margin: 0 auto; 
+  padding: 0 15px;
+}
+
+.achievement-row {
+  display: flex;
+  gap: 35px;
+ /* margin-bottom: 50px;*/
+  align-items: center;
+   padding: 25px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fdfbfd, #c3cb6dc1);
+  width: 90%; 
+  margin: 0 auto 50px;
+}
+
+/* Alternate layout */
+.achievement-row:nth-child(even) {
+  flex-direction: row-reverse;
+  background: linear-gradient(135deg, #c3cb6dc1, #f9f9ff);
+}
+
+/* IMAGE */
+.image-box {
+  flex: 0 0 35%;          /* was 42% → reduced width */
+  max-height: 260px;     /* control height */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+.image-box img {
+  width: 100%;
+  height: 260px;         /* same as max-height */
+  object-fit: cover;
+}
+
+
+/* Zoom on hover */
+.image-box:hover img {
+  transform: scale(1.12);
+}
+
+/* CONTENT */
+.content-box {
+  flex: 1;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05); /* transparent to blend with party colors */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Title with underline accent */
+.content-box h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  position: relative;
+  color: #1f1b05; /* gold accent for highlight */
+}
+
+.content-box h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 50px;
+  height: 3px;
+  background: #e30613; /* DMK red accent underline */
+  border-radius: 2px;
+}
+
+/* Paragraph with line spacing & icon bullet (optional) */
+.content-box p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #0c0404e3;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.content-box p::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #ffd700; /* gold bullet */
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+/* Span / tag style */
+.content-box span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffcc00; /* subtle highlight */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 12px;
+  width: fit-content;
+}
+
+/* Optional: subtle hover text effect */
+.achievement-row:hover .content-box h3 {
+  color: #090901; /* slightly brighter gold on hover */
+}
+
+
+
+/* ✨ SCROLL ANIMATION */
+.animate {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeUp 1s ease forwards;
+}
+
+/* Delay for each card */
+.animate:nth-child(1) { animation-delay: 0.2s; }
+.animate:nth-child(2) { animation-delay: 0.4s; }
+.animate:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .achievement-row,
+  .achievement-row:nth-child(even) {
+    flex-direction: column;
+  }
+
+  .image-box {
+    width: 100%;
+  }
+}

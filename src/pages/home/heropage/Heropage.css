@@ -1,0 +1,60 @@
+.heropage {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../../../assets/bg-img.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  margin-top: 20rem;
+  max-width: 700px;
+  padding: 0 2rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 6px 9px #000;
+}
+
+/* Tamil heading */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+  letter-spacing: 0.5px;
+}
+
+.second-head {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #CFA859;
+}
+
+/* Description */
+.hero-desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+/* Mobile spacing */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 0 1.2rem;
+  }
+}

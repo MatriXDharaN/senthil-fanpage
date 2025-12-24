@@ -1,0 +1,81 @@
+/* ===============================
+   SOCIAL MEDIA SHOWCASE
+================================ */
+
+.social-grid {
+  max-width: 95%;
+  margin: 3rem auto;
+  margin-bottom: 8rem;
+  padding: 0 1.5rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+/* Individual card */
+.social-grid > * {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.2rem;
+
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  transition: 
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* Hover effect */
+.social-grid > *:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 18px 45px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* Embed iframe adjustments */
+.social-grid iframe {
+  width: 100% !important;
+  border-radius: 14px;
+}
+
+/* Instagram fix */
+.instagram-media {
+  margin: 0 !important;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* X (Twitter) embed fix */
+.twitter-tweet {
+  margin: 0 auto !important;
+}
+
+/* Facebook embed fix */
+.fb-page {
+  width: 100% !important;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1024px) {
+  .social-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .social-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .social-grid > * {
+    padding: 1rem;
+  }
+}

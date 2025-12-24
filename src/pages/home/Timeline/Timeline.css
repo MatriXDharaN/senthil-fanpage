@@ -1,0 +1,56 @@
+.timeline-container {
+  position: relative;
+  max-width: 1000px; /* max-w-7xl */
+  margin: 0 auto;
+  padding: 3rem 1rem; /* py-20 px-4 */
+  overflow: hidden;
+}
+
+.timeline-head {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* ==============================
+   Vertical Spine
+============================== */
+.timeline-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: rgba(198, 163, 89, 0.2);
+  border-radius: 999px;
+  left: 36px; /* 2.25rem for mobile */
+  transform: translateX(-50%);
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Gradient accent */
+.timeline-spine-accent {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #c6a359,
+    transparent
+  );
+  opacity: 1;
+}
+
+/* Desktop: center line */
+@media (min-width: 768px) {
+  .timeline-spine {
+    left: 50%;
+  }
+}
+
+/* ==============================
+   Items wrapper
+============================== */
+.timeline-items {
+  position: relative;
+  z-index: 1;
+}

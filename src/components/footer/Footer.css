@@ -1,0 +1,22 @@
+.footer {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 1px 8%;
+}
+
+.footer-container {
+ text-align: center;
+}
+
+.footer-text {
+  font-size: 18px;
+  color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
