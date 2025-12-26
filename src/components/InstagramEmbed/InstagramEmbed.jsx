@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 
-const InstagramEmbed = () => {
+const InstagramEmbed = ({ permalink }) => {
   useEffect(() => {
-    if (window.instgrm) window.instgrm.Embeds.process();
-  }, []);
+    if (window.instgrm) {
+      window.instgrm.Embeds.process();
+    }
+  }, [permalink]);
 
   return (
     <blockquote
       className="instagram-media"
-      data-instgrm-permalink="https://www.instagram.com/p/DSmndq6EekO/"
+      data-instgrm-permalink={permalink}
       data-instgrm-version="14"
       style={{ width: "100%" }}
     />

@@ -1,0 +1,345 @@
+/* ROOT */
+.timeline-root {
+  background: #1b2539;
+  min-height: 100vh;
+  color: white;
+  padding-bottom: 8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* BACKGROUND DECOR */
+.bg-decor {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.bg-decor.blue {
+  width: 400px;
+  height: 400px;
+  background: #fff;
+  top: 0;
+  left: 20%;
+}
+
+.bg-decor.gold {
+  width: 500px;
+  height: 500px;
+  background: #d4af37;
+  bottom: 10%;
+  right: 20%;
+}
+
+/* HEADER */
+.timeline-header {
+  text-align: center;
+  padding: 8rem 1rem 6rem;
+}
+
+.timeline-title-main {
+  font-size: 3.5rem;
+  font-weight: 800;
+}
+
+.timeline-title-main span {
+  background: linear-gradient(to bottom, #fde68a, #d4af37);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.tamil-badge {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.6rem;
+  color: #d4af37;
+  letter-spacing: 0.2em;
+}
+
+.scroll-indicator {
+  margin: 4rem auto 0;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, #d4af37, transparent);
+  animation: bounce 1.5s infinite;
+}
+
+/* TIMELINE */
+.timeline-container {
+  max-width: 1800px;
+  margin: auto;
+  position: relative;
+}
+
+.timeline-spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  height: 95%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.timeline-flow {
+  width: 100%;
+  height: 80%;
+  background: linear-gradient(to bottom, transparent, #d4af37, transparent);
+  animation: flow 4s linear infinite;
+}
+
+/* ROW */
+.timeline-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+
+.timeline-row.left {
+  justify-content: flex-end;
+}
+
+.timeline-row.right {
+  justify-content: flex-start;
+}
+
+/* NODE */
+.timeline-node {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: 42px;
+  height: 42px;
+}
+
+.node-glow {
+  position: absolute;
+  inset: 0;
+  background: rgba(212, 175, 55, 0.4);
+  filter: blur(12px);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.node-core {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #050a14;
+  border: 2px solid #d4af37;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-ring {
+  position: absolute;
+  inset: -30%;
+  border: 1px dashed rgba(212, 175, 55, 0.4);
+  border-radius: 50%;
+  animation: rotate 6s linear infinite;
+}
+
+/* CONNECTOR */
+.timeline-connector {
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #d4af37);
+}
+
+.timeline-connector.left {
+  right: 50%;
+}
+
+.timeline-connector.right {
+  left: 50%;
+}
+
+/* CARD */
+.timeline-card-wrapper {
+  width: 45%;
+}
+
+.timeline-card-wrapper.left {
+  padding-right: 4rem;
+}
+
+.timeline-card-wrapper.right {
+  padding-left: 4rem;
+}
+
+.timeline-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.timeline-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.18);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.phase-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: #d4af37;
+}
+
+.year-pill {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-description {
+  color: #94a3b8;
+  line-height: 1.8;
+}
+
+/* SIDE BAR */
+.side-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: rgba(212, 175, 55, 0.5);
+}
+
+.side-bar.left {
+  right: 0;
+}
+
+.side-bar.right {
+  left: 0;
+}
+
+/* FOOTER */
+.timeline-footer {
+  text-align: center;
+  margin-top: 8rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  color: rgba(212, 175, 55, 0.4);
+}
+
+/* ANIMATIONS */
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes flow {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .timeline-spine {
+    left: 24px;
+  }
+
+  .tamil-badge {
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+  }
+
+
+
+  .timeline-card-wrapper.left {
+    padding-right: 0rem;
+  }
+
+  .timeline-card-wrapper.right {
+    padding-left: 0rem;
+  }
+
+  .timeline-node {
+    left: 24px;
+    transform: none;
+  }
+
+  .timeline-connector {
+    display: none;
+  }
+
+  .timeline-title-main {
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+
+  .timeline-card-wrapper {
+    width: calc(100% - 70px);
+    padding-left: 1rem !important;
+  }
+
+  .timeline-row.left {
+  justify-content: center;
+}
+
+.timeline-row.right {
+  justify-content: center;
+}
+
+.timeline-card {
+  position: relative;
+  padding: 1rem;
+}
+}

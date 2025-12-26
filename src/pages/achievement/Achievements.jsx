@@ -1,154 +1,220 @@
-import React, { useState } from "react";
-import "./Achievements.css"; // keep your existing CSS
+import React, { useEffect, useRef } from "react";
+import "./Achievements.css";
 
-const statCards = [
-  {
-    img: "images/achieveImg1.jpg",
-    alt: "Power",
-    title: "1.5 Lakh Free Power Connections",
-    desc: "Providing free electricity to farmers to boost state agriculture.",
-  },
-  {
-    img: "images/achieveImg1.jpg",
-    alt: "Helpline",
-    title: "Minnagam Helpline (1912)",
-    desc: "24/7 consumer grievance cell for instant electricity issues resolution.",
-  },
-  {
-    img: "images/achieveImg1.jpg",
-    alt: "Bus",
-    title: "Bus Modernization Statewide",
-    desc: "Bus Modernization",
-  },
-  {
-    img: "images/achieveImg1.jpg",
-    alt: "Water",
-    title: "1 Lakh Liter Water Tanks",
-    desc: "Water Tanks",
-  },
-  {
-    img: "images/achieveImg1.jpg",
-    alt: "Billing",
-    title: "Modernizing TNEB Billing",
-    desc: "Modernizing TNEB Billing",
-  },
-];
-
-const slides = [
-  {
-    tag: "Farmers' Welfare",
-    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
-    quote:
-      "By providing 1.5 Lakh Free Power Connections in just one year, we have powered the dreams of every farming family in Tamil Nadu.",
-    cite: "— TANGEDCO Record Achievement",
-  },
-  {
-    tag: "Transport Service",
-    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
-    quote:
-      "From introducing Small Buses to modernizing the state fleet, our goal is to make public transport accessible to every remote village.",
-    cite: "— Enhancing State Connectivity",
-  },
-  {
-    tag: "Consumer Welfare",
-    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
-    quote:
-      "The Minnagam (1912) Helpline ensures that a citizen's power complaint is solved with just one phone call, day or night.",
-    cite: "— 24/7 Grievance Redressal",
-  },
-  {
-    tag: "Health & Public Aid",
-    img: "https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg?auto=compress&cs=tinysrgb&w=800",
-    quote:
-      "Organizing Mega Medical Camps in Karur and providing direct aid from the CM Relief Fund is my heartfelt duty to the people.",
-    cite: "— Grassroots People's Service",
-  },
-  {
-    tag: "Digital Infrastructure",
-    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
-    quote:
-      "Implementing Smart Meters statewide ensures transparent billing and brings modern technology to every household's doorstep.",
-    cite: "— Modernizing TNEB Billing",
-  },
-  {
-    tag: "Constituency Development",
-    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
-    quote:
-      "From 1 Lakh Liter Water Tanks to paved roads in every panchayat, we are building a foundation of progress for Karur.",
-    cite: "— Karur Modernization Projects",
-  },
-];
+import image1 from "../../assets/img1.jpeg";
+import image2 from "../../assets/img2.jpeg";
+import image3 from "../../assets/img3.jpeg";
+import image4 from "../../assets/img4.jpeg";
+import image5 from "../../assets/img5.jpeg";
+import image6 from "../../assets/img6.jpeg";
 
 const Achievements = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const gridRef = useRef(null);
+  const autoSlideRef = useRef(null);
 
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % slides.length);
-  };
+  /* ========================================
+     Counter Animation on Scroll
+  ======================================== */
+  useEffect(() => {
+    const animateCounter = (element, target, duration, formatter) => {
+      let start = 0;
+      const increment = target / (duration / 16);
 
-  const prevSlide = () => {
-    setActiveIndex((prev) =>
-      prev === 0 ? slides.length - 1 : prev - 1
+      const timer = setInterval(() => {
+        start += increment;
+
+        if (start >= target) {
+          start = target;
+          clearInterval(timer);
+        }
+
+        element.textContent = formatter(start);
+      }, 16);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || entry.target.dataset.done) return;
+
+          entry.target.dataset.done = "true";
+          const value = entry.target.dataset.target;
+
+          if (value.includes("L")) {
+            animateCounter(entry.target, 200000, 2000, (v) =>
+              (v / 100000).toFixed(1) + "L+"
+            );
+          } else if (value.includes("K")) {
+            const number = parseFloat(value) * 1000;
+            animateCounter(entry.target, number, 2000, (v) =>
+              (v / 1000).toFixed(1) + "K+"
+            );
+          } else if (value.includes("%")) {
+            animateCounter(entry.target, parseInt(value), 2000, (v) =>
+              Math.floor(v) + "%"
+            );
+          } else if (value === "24/7") {
+            entry.target.textContent = "24/7";
+          }
+        });
+      },
+      { threshold: 0.5 }
     );
-  };
+
+    document.querySelectorAll(".stat-number").forEach((el) => {
+      el.dataset.target = el.textContent.trim();
+      el.textContent = "0";
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  /* ========================================
+     Card Slider Logic
+  ======================================== */
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const cards = Array.from(grid.children);
+    const cardWidth = 430;
+
+    // Clone cards for infinite effect
+    cards.forEach((card) => {
+      grid.appendChild(card.cloneNode(true));
+    });
+
+    const moveCards = (direction) => {
+      const currentScroll = grid.scrollLeft;
+
+      if (direction === "right") {
+        grid.scrollBy({ left: cardWidth, behavior: "smooth" });
+
+        if (currentScroll + cardWidth >= cardWidth * cards.length) {
+          setTimeout(() => {
+            grid.style.scrollBehavior = "auto";
+            grid.scrollLeft = 0;
+            grid.style.scrollBehavior = "smooth";
+          }, 300);
+        }
+      } else {
+        if (currentScroll <= 0) {
+          grid.style.scrollBehavior = "auto";
+          grid.scrollLeft = cardWidth * cards.length;
+          grid.style.scrollBehavior = "smooth";
+        }
+        grid.scrollBy({ left: -cardWidth, behavior: "smooth" });
+      }
+    };
+
+    // Auto slide
+    autoSlideRef.current = setInterval(() => moveCards("right"), 5000);
+
+    const resetAutoSlide = () => {
+      clearInterval(autoSlideRef.current);
+      autoSlideRef.current = setInterval(() => moveCards("right"), 5000);
+    };
+
+    // Button handlers
+    document
+      .querySelector(".next-card")
+      ?.addEventListener("click", () => {
+        moveCards("right");
+        resetAutoSlide();
+      });
+
+    document
+      .querySelector(".prev-card")
+      ?.addEventListener("click", () => {
+        moveCards("left");
+        resetAutoSlide();
+      });
+
+    // Touch support
+    let startX = 0;
+    let endX = 0;
+
+    grid.addEventListener("touchstart", (e) => {
+      startX = e.changedTouches[0].screenX;
+    });
+
+    grid.addEventListener("touchend", (e) => {
+      endX = e.changedTouches[0].screenX;
+      if (startX - endX > 50) {
+        moveCards("right");
+        resetAutoSlide();
+      }
+      if (endX - startX > 50) {
+        moveCards("left");
+        resetAutoSlide();
+      }
+    });
+
+    return () => clearInterval(autoSlideRef.current);
+  }, []);
 
   return (
-    <section id="achievements" className="achievement-section">
-      {/* Title */}
-      <div className="section-title">
-        <h1>Achievement</h1>
+    <div  className="achievements-page">
+      {/* Header */}
+      <div className="section-header">
+        <h1>Achievements</h1>
+        <p className="section-subtitle">
+          Transforming Tamil Nadu Through Dedicated Service & Innovation
+        </p>
       </div>
 
-      {/* Stat Cards */}
-      <div className="card-slider-container">
-        <button className="card-btn prev-card">&#8249;</button>
+      {/* Stats */}
+      <section className="stats-overview">
+        <div className="stats-grid">
+          <div className="stat-box">
+            <span className="stat-number">2L+</span>
+            <span className="stat-label">இலவச விவசாய மின் இணைப்புகள்</span>
+          </div>
 
-        <div className="achievement-grid" id="infiniteGrid">
-          {statCards.map((card, index) => (
-            <div className="stat-card" key={index}>
-              <img src={card.img} alt={card.alt} />
-              <h3>{card.title}</h3>
-              <p>{card.desc}</p>
-            </div>
-          ))}
+          <div className="stat-box">
+            <span className="stat-number">24/7</span>
+            <span className="stat-label">மின் நுகர்வோர் சேவை மையம்</span>
+          </div>
+
+          <div className="stat-box">
+            <span className="stat-number">77.5K+</span>
+            <span className="stat-label">
+              நெசவாளர்களுக்கு 1000 யூனிட் இலவச மின்சாரம்
+            </span>
+          </div>
+
+          <div className="stat-box">
+            <span className="stat-number">50%</span>
+            <span className="stat-label">புதுப்பிக்கத்தக்க ஆற்றல் இலக்கு</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Slider */}
+      <section className="card-slider-section">
+        <div className="slider-header">
+          <h2>Key Initiatives & Projects</h2>
+          <p>Driving progress across multiple sectors</p>
         </div>
 
-        <button className="card-btn next-card">&#8250;</button>
-      </div>
+        <div className="card-slider-container">
+          <button className="card-btn prev-card">&#8249;</button>
 
-      {/* Main Slider */}
-      <div className="achievement-slider">
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`achieve-slide ${
-              index === activeIndex ? "active" : ""
-            }`}
-          >
-            <div className="achieve-image">
-              <img src={slide.img} alt={slide.tag} />
-            </div>
-            <div className="achieve-content">
-              <span className="tag">{slide.tag}</span>
-              <blockquote className="testimonial-typo">
-                “{slide.quote}”
-              </blockquote>
-              <p className="cite">{slide.cite}</p>
-            </div>
+          <div className="achievement-grid" ref={gridRef}>
+            {[image1, image2, image3, image4, image5, image6].map(
+              (img, i) => (
+                <div className="stat-card" key={i}>
+                  <img src={img} alt={`Achievement ${i + 1}`} />
+                </div>
+              )
+            )}
           </div>
-        ))}
-      </div>
 
-      {/* Navigation */}
-      <div className="nav-controls">
-        <button className="nav-btn prev" onClick={prevSlide}>
-          &#10094;
-        </button>
-        <button className="nav-btn next" onClick={nextSlide}>
-          &#10095;
-        </button>
-      </div>
-    </section>
+          <button className="card-btn next-card">&#8250;</button>
+        </div>
+      </section>
+    </div>
   );
 };
 

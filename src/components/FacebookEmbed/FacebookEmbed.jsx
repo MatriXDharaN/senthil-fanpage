@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-const FacebookEmbed = () => {
+const FacebookEmbed = ({ pageUrl }) => {
   useEffect(() => {
     if (window.FB) {
       window.FB.XFBML.parse();
     }
-  }, []);
+  }, [pageUrl]);
 
   return (
     <div
       className="fb-page"
-      data-href="https://www.facebook.com/officialsenthilbalaji"
+      data-href={pageUrl}
       data-tabs="timeline"
       data-width="500"
-      data-height="600"
+      data-height="1000"
       data-small-header="false"
       data-adapt-container-width="true"
       data-hide-cover="false"

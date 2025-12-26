@@ -3,9 +3,9 @@
   position: fixed;
   top: 0;
   width: 100%;
-  padding: .5rem 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.6);
+  background: #ffffff;
+  /* #ffef91 */
   backdrop-filter: blur(5px);
   transition: all 0.3s ease;
 } 
@@ -17,10 +17,18 @@
 .nav-container {
   max-width: 1200px;
   margin: auto;
-  padding: 1rem 2rem;
+  padding: 0rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  gap: 1rem;
 }
 
 /* Logo */
@@ -38,14 +46,16 @@
 }
 
 .logo {
-  height: 20px;
-
+  height: 100px;
+  display: block;
+  top: 50%;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #fff;
-  font-weight: 500;
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 700;
   position: relative;
 }
 
@@ -96,11 +106,15 @@
     align-items: center;
     gap: 1.5rem;
     padding: 2rem 0;
-    transform: translateY(-120%);
-    transition: transform 0.4s ease;
+
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
   }
 
   .nav-links.open {
-    transform: translateY(0);
+    max-height: 300px;
+    opacity: 1;
   }
 }

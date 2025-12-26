@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const XEmbed = () => {
+const XEmbed = ({ tweetUrl }) => {
   useEffect(() => {
     const loadX = () => {
       if (window.twttr && window.twttr.widgets) {
@@ -17,11 +17,11 @@ const XEmbed = () => {
       script.onload = loadX;
       document.body.appendChild(script);
     }
-  }, []);
+  }, [tweetUrl]);
 
   return (
     <blockquote className="twitter-tweet">
-      <a href="https://twitter.com/V_Senthilbalaji/status/1839681578538311927">X</a>
+      <a href={tweetUrl}>X</a>
     </blockquote>
   );
 };

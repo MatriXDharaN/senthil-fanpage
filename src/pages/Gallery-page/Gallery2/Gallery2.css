@@ -1,0 +1,126 @@
+.carousel-fullscreen {
+  width: 100vw;
+  height: 65vh;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  margin-top: 5rem;
+}
+
+.slide-img {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;       
+  background-position: center 15%;
+}
+
+
+
+.slide-in {
+  z-index: 2;
+  animation: teslaIn 0.75s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.slide-out {
+  z-index: 1;
+  animation: teslaOut 0.75s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes teslaIn {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes teslaOut {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+
+.ui-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  padding: 12px 18px;
+  border-radius: 12px;
+  color: #fff;
+  text-align: center;
+  pointer-events: auto;
+}
+
+.caption h3 {
+  font-size: 18px;
+  line-height: 1.3;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.25);
+  border: none;
+  color: white;
+  font-size: 22px;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.nav.left { left: 12px; }
+.nav.right { right: 12px; }
+
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #777;
+  border-radius: 50%;
+}
+
+.dot.active {
+  background: #fff;
+}
+
+@media (max-width: 1024px) {
+  .slide-img {
+    background-position: center 10%;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .carousel-fullscreen {
+    height: 45vh;
+  }
+
+  .slide-img {
+    background-position: center 8%;
+  }
+
+  .caption h3 {
+    font-size: 14px;
+  }
+}
