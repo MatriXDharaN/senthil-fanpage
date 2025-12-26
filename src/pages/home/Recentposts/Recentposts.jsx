@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./Recentposts.css";
 import img1 from "../../../assets/images/img1.jpg";
 import img2 from "../../../assets/images/img3.jpg";
@@ -7,7 +7,6 @@ import { NavLink } from "react-router-dom";
 
 export default function Recentposts() {
   const [statsDone, setStatsDone] = useState({});
-  const [showcaseIndex, setShowcaseIndex] = useState(0);
   const gridRef = useRef(null);
   const statsObserverRef = useRef(null);
   const cardWidth = 380;
@@ -105,32 +104,35 @@ export default function Recentposts() {
   ];
 
   // Counter animation
-  const animateCounter = (index, target) => {
-    let start = 0;
-    const element = document.querySelector(`[data-stat-index="${index}"]`);
-    if (!element) return;
+  const animateCounter = useCallback(
+    (index, target) => {
+      let start = 0;
+      const element = document.querySelector(`[data-stat-index="${index}"]`);
+      if (!element) return;
 
-    const duration = 2000;
-    const increment = target / (duration / 16);
+      const duration = 2000;
+      const increment = target / (duration / 16);
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        start = target;
-        clearInterval(timer);
-      }
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          start = target;
+          clearInterval(timer);
+        }
 
-      if (target === 24) {
-        element.textContent = "24/7";
-      } else if (stats[index].target.includes("L")) {
-        element.textContent = (start / 100000).toFixed(1) + "L+";
-      } else if (stats[index].target.includes("K")) {
-        element.textContent = (start / 1000).toFixed(1) + "K+";
-      } else if (stats[index].target.includes("%")) {
-        element.textContent = Math.floor(start) + "%";
-      }
-    }, 16);
-  };
+        if (target === 24) {
+          element.textContent = "24/7";
+        } else if (stats[index].target.includes("L")) {
+          element.textContent = (start / 100000).toFixed(1) + "L+";
+        } else if (stats[index].target.includes("K")) {
+          element.textContent = (start / 1000).toFixed(1) + "K+";
+        } else if (stats[index].target.includes("%")) {
+          element.textContent = Math.floor(start) + "%";
+        }
+      }, 16);
+    },
+    [stats]
+  );
 
   // Stats observer
   useEffect(() => {
@@ -168,41 +170,36 @@ export default function Recentposts() {
     });
 
     return () => observer.disconnect();
-  }, [statsDone]);
-
-  // Showcase auto-slide
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowcaseIndex((prev) => (prev + 1) % showcaseSlides.length);
-    }, 7000);
-    return () => clearInterval(interval);
-  }, []);
+  }, [statsDone, animateCounter, stats]);
 
   // Card slider functions
-  const moveCards = (direction) => {
-    if (!gridRef.current) return;
+  const moveCards = useCallback(
+    (direction) => {
+      if (!gridRef.current) return;
 
-    const currentScroll = gridRef.current.scrollLeft;
+      const currentScroll = gridRef.current.scrollLeft;
 
-    if (direction === "right") {
-      gridRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
+      if (direction === "right") {
+        gridRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
 
-      if (currentScroll + cardWidth >= cardWidth * cards.length) {
-        setTimeout(() => {
+        if (currentScroll + cardWidth >= cardWidth * cards.length) {
+          setTimeout(() => {
+            gridRef.current.style.scrollBehavior = "auto";
+            gridRef.current.scrollLeft = 0;
+            gridRef.current.style.scrollBehavior = "smooth";
+          }, 300);
+        }
+      } else {
+        if (currentScroll <= 0) {
           gridRef.current.style.scrollBehavior = "auto";
-          gridRef.current.scrollLeft = 0;
+          gridRef.current.scrollLeft = cardWidth * cards.length;
           gridRef.current.style.scrollBehavior = "smooth";
-        }, 300);
+        }
+        gridRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" });
       }
-    } else {
-      if (currentScroll <= 0) {
-        gridRef.current.style.scrollBehavior = "auto";
-        gridRef.current.scrollLeft = cardWidth * cards.length;
-        gridRef.current.style.scrollBehavior = "smooth";
-      }
-      gridRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" });
-    }
-  };
+    },
+    [cardWidth, cards.length]
+  );
 
   // Card auto-slide
   useEffect(() => {
@@ -210,7 +207,7 @@ export default function Recentposts() {
       moveCards("right");
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [moveCards]);
 
   // Touch swipe support
   useEffect(() => {
@@ -245,7 +242,6 @@ export default function Recentposts() {
 
   return (
     <div>
-
       {/* Stats Overview */}
       <section className="stats-overview">
         <div className="stats-grid">
@@ -263,7 +259,7 @@ export default function Recentposts() {
       {/* Card Slider Section */}
       <section className="card-slider-section">
         <div className="slider-header">
-          <h2>தற்போதைய தகவல்கள்</h2>
+          <h2 className="slider-head">தற்போதைய தகவல்கள்</h2>
         </div>
 
         <div className="card-slider-container">

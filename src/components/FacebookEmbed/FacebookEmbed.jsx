@@ -1,10 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const FacebookEmbed = ({ pageUrl }) => {
+  const [width, setWidth] = useState(
+    window.innerWidth <= 768 ? 350 : 500
+  );
+
   useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth <= 768 ? 300 : 500);
+    };
+
+    window.addEventListener("resize", handleResize);
+
     if (window.FB) {
       window.FB.XFBML.parse();
     }
+
+    return () => window.removeEventListener("resize", handleResize);
   }, [pageUrl]);
 
   return (
@@ -12,7 +24,7 @@ const FacebookEmbed = ({ pageUrl }) => {
       className="fb-page"
       data-href={pageUrl}
       data-tabs="timeline"
-      data-width="500"
+      data-width={width}
       data-height="1000"
       data-small-header="false"
       data-adapt-container-width="true"
