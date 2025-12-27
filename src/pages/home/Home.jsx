@@ -17,13 +17,13 @@ const Home = () => {
       <TimelineComponent />
       <Recentposts />
       <div className="social-grid-container">
-        <h1 className="head-anim" style={{ marginTop: "3rem", textAlign: "center" }}>Honourable V. Senthilbalaji Fansclub Social Media Pages</h1>
+        <h1 className="head-anim" style={{ marginTop: "5rem", textAlign: "center", marginBottom: "3rem" }}>Honourable V. Senthilbalaji Fansclub Social Media Pages</h1>
         <div className="social-grid">
-          <XEmbed tweetUrl="https://x.com/vsbfansclub/status/1691275908559278080?s=20" />
+          <XEmbed tweetUrl="https://twitter.com/vsbfansclub/status/1691275908559278080" />
           <FacebookEmbed pageUrl="https://www.facebook.com/vsenthilbalajifans/" />
           <InstagramEmbed permalink="https://www.instagram.com/p/Cv8tNgpSKp6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" />
         </div>
-        <h1 className="head-anim" style={{ marginTop: "5rem", textAlign: "center", fontSize: "1.5rem" }}>மாண்புமிகு வி. செந்தில் பாலாஜி அவர்களின் சமூக ஊடகப் பக்கங்கள்</h1>
+        <h1 className="head-anim" style={{ marginTop: "5rem", textAlign: "center", marginBottom: "6rem" }}>மாண்புமிகு வி. செந்தில் பாலாஜி அவர்களின் சமூக ஊடகப் பக்கங்கள்</h1>
         <div className="social-grid">
           <XEmbed tweetUrl="https://twitter.com/V_Senthilbalaji/status/1839681578538311927" />
           <FacebookEmbed pageUrl="https://www.facebook.com/officialsenthilbalaji/" />

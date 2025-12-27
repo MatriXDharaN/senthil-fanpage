@@ -96,6 +96,14 @@
     display: flex;
   }
 
+  .nav-logo {
+    font-size: 1.1rem;
+  }
+
+  .logo {
+    height: 70px;
+  }
+
   .nav-links {
     position: absolute;
     top: 100%;
