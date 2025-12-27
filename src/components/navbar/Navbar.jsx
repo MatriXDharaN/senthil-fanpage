@@ -33,7 +33,7 @@ const Navbar = () => {
         {/* Desktop Links */}
         <nav className={`nav-links ${isOpen ? "open" : ""}`}>
           <NavLink to="/" onClick={closeMenu}>Home</NavLink>
-          <NavLink to="/achievements" onClick={closeMenu}>Achievements</NavLink>
+          <NavLink to="/recentposts" onClick={closeMenu}>Recent posts</NavLink>
           <NavLink to="/gallerypage" onClick={closeMenu}>Gallery</NavLink>
         </nav>
 

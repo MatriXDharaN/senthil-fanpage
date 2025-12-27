@@ -69,9 +69,6 @@ const TimelineComponent = () => {
           />
         ))}
       </div>
-
-      {/* Footer */}
-      <footer className="timeline-footer">Integrity • Vision • Service</footer>
     </section>
   );
 };

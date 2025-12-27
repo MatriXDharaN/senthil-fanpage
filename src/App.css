@@ -1,0 +1,15 @@
+.head-anim {
+    background: linear-gradient(
+    120deg,
+    var(--text-dark) 0%,
+    var(--primary-red) 30%,
+    var(--accent-gold) 50%,
+    var(--primary-red) 70%,
+    var(--text-dark) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 6s ease infinite;
+}

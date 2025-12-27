@@ -105,7 +105,7 @@ const Gallcomp = () => {
   return (
     <div className="gallery-section">
 
-      <h2 className="gallery-title">நிகழ்வுகள்</h2>
+      <h2 className="gallery-title head-anim">நிகழ்வுகள்</h2>
 
       {/* 🔥 HORIZONTAL BUTTON BAR */}
       <div className="gallery-tabs">

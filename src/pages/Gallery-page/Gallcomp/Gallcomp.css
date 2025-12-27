@@ -167,6 +167,7 @@
   .gallery-tabs button {
     width: 180px;
     height: 46px;
+    font-size: 11px;
   }
 
   .gallery-grid {
