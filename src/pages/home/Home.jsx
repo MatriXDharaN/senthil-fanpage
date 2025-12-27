@@ -53,7 +53,7 @@ useEffect(() => {
           }}
         >
           மாண்புமிகு{" "}
-          <span style={{ whiteSpace: "nowrap" }}>வி செந்தில்பாலாஜி</span> ரசிகர்
+          <span style={{ whiteSpace: "nowrap" }}>V செந்தில்பாலாஜி</span> ரசிகர்
           மன்ற சமூக ஊடகப் பக்கங்கள்
         </h1>
 
@@ -83,7 +83,7 @@ useEffect(() => {
           }}
         >
           மாண்புமிகு{" "}
-          <span style={{ whiteSpace: "nowrap" }}>வி செந்தில்பாலாஜி</span>{" "}
+          <span style={{ whiteSpace: "nowrap" }}>V செந்தில்பாலாஜி</span>{" "}
           அவர்களின் சமூக ஊடகப் பக்கங்கள்
         </h1>
 
