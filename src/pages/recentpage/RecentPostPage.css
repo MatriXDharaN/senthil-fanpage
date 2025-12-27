@@ -315,3 +315,50 @@
   from { transform: translateX(0); }
   to   { transform: translateX(100%); }
 }
+
+
+.share-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 25px 0 40px;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.share-btn.primary {
+  background: var(--primary-red);
+  color: white;
+}
+
+.share-btn.whatsapp {
+  background: #25d366;
+  color: white;
+}
+
+.share-btn.facebook {
+  background: #1877f2;
+  color: white;
+}
+
+.share-btn.x {
+  background: black;
+  color: white;
+}
+
+.share-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}

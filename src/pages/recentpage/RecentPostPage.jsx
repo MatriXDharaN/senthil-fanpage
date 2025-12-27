@@ -221,6 +221,26 @@ const RecentPostPage = () => {
     );
   }
 
+  const shareUrl = window.location.href;
+  const shareTitle = data?.title || "Recent Post";
+  const shareText = `${shareTitle} | ${data?.category}`;
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+      } catch (err) {
+        console.log("Share cancelled");
+      }
+    } else {
+      alert("Sharing not supported on this browser");
+    }
+  };
+
   /* ================= RENDER ================= */
 
   return (
@@ -229,6 +249,45 @@ const RecentPostPage = () => {
         <Link to="/" className="back-btn">
           Back
         </Link>
+
+        <div className="share-section">
+          <button className="share-btn primary" onClick={handleShare}>
+            🔗 Share
+          </button>
+
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(
+              shareTitle + " " + shareUrl
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="share-btn whatsapp"
+          >
+            WhatsApp
+          </a>
+
+          <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+              shareUrl
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="share-btn facebook"
+          >
+            Facebook
+          </a>
+
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+              shareTitle
+            )}&url=${encodeURIComponent(shareUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="share-btn x"
+          >
+            X
+          </a>
+        </div>
 
         <div className="details-header">
           <span className="details-tag">{data.category}</span>
@@ -297,10 +356,6 @@ const RecentPostPage = () => {
           dangerouslySetInnerHTML={{ __html: data.content }}
         />
       </div>
-
-      <footer>
-        <p>© 2025 Minister Fan Page | Not an Official Website</p>
-      </footer>
     </>
   );
 };
