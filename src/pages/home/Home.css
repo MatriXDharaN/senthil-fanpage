@@ -47,6 +47,8 @@
   margin: 0 !important;
   border-radius: 14px;
   overflow: hidden;
+  max-width: 100% !important;
+  min-width: 320px;
 }
 
 /* X (Twitter) embed fix */

@@ -1,26 +1,59 @@
-export const loadTwitter = () =>
-  new Promise((resolve) => {
-    if (window.twttr) return resolve();
+let twitterPromise;
+let instagramPromise;
+let facebookPromise;
+
+/* ---------------- Twitter ---------------- */
+export const loadTwitter = () => {
+  if (twitterPromise) return twitterPromise;
+
+  twitterPromise = new Promise((resolve) => {
+    if (window.twttr?.widgets) {
+      resolve();
+      return;
+    }
+
     const script = document.createElement("script");
     script.src = "https://platform.twitter.com/widgets.js";
     script.async = true;
-    script.onload = resolve;
+    script.onload = () => resolve();
     document.body.appendChild(script);
   });
 
-export const loadInstagram = () =>
-  new Promise((resolve) => {
-    if (window.instgrm) return resolve();
+  return twitterPromise;
+};
+
+/* ---------------- Instagram ---------------- */
+export const loadInstagram = () => {
+  if (instagramPromise) return instagramPromise;
+
+  instagramPromise = new Promise((resolve) => {
+    if (window.instgrm?.Embeds?.process) {
+      resolve();
+      return;
+    }
+
     const script = document.createElement("script");
     script.src = "https://www.instagram.com/embed.js";
     script.async = true;
-    script.onload = resolve;
+    script.onload = () => {
+      // Instagram needs a small delay on mobile
+      setTimeout(resolve, 300);
+    };
     document.body.appendChild(script);
   });
 
-export const loadFacebook = () =>
-  new Promise((resolve) => {
-    if (window.FB) return resolve();
+  return instagramPromise;
+};
+
+/* ---------------- Facebook ---------------- */
+export const loadFacebook = () => {
+  if (facebookPromise) return facebookPromise;
+
+  facebookPromise = new Promise((resolve) => {
+    if (window.FB) {
+      resolve();
+      return;
+    }
 
     window.fbAsyncInit = function () {
       window.FB.init({
@@ -35,3 +68,6 @@ export const loadFacebook = () =>
     script.async = true;
     document.body.appendChild(script);
   });
+
+  return facebookPromise;
+};

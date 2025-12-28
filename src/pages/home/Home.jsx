@@ -9,7 +9,11 @@ import TestimonialSection from "./testimonialsection/TestimonialSection";
 import TimelineComponent from "./timelinecomponent/TimelineComponent";
 import Recentposts from "./Recentposts/Recentposts";
 
-import { loadTwitter, loadInstagram, loadFacebook } from "../../utils/loadSocialSDKs"
+import {
+  loadTwitter,
+  loadInstagram,
+  loadFacebook,
+} from "../../utils/loadSocialSDKs";
 
 const Home = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -25,15 +29,24 @@ const Home = () => {
 
   const [embedsReady, setEmbedsReady] = useState(false);
 
-useEffect(() => {
-  Promise.all([
-    loadTwitter(),
-    loadInstagram(),
-    loadFacebook(),
-  ]).then(() => {
-    setEmbedsReady(true);
-  });
-}, []);
+  useEffect(() => {
+    if (!embedsReady) return;
+
+    const t = setTimeout(() => {
+      if (window.instgrm?.Embeds?.process) {
+        window.instgrm.Embeds.process();
+      }
+    }, 1000);
+
+    return () => clearTimeout(t);
+  }, [isMobile, embedsReady]);
+
+  useEffect(() => {
+    Promise.all([loadTwitter(), loadInstagram(), loadFacebook()]).then(() => {
+      setEmbedsReady(true);
+    });
+  }, []);
+
   return (
     <div>
       <Heropage />
