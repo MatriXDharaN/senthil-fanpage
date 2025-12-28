@@ -36,7 +36,7 @@ export default function Recentposts() {
       img: img1,
       tag: "கவுண்டம்பாளையம்",
       title: "கழக பணிகளுக்கான புதிய அலுவலகத்தை திறந்து வைத்தார்",
-      desc: "கழகத் தலைவர், மாண்புமிகு தமிழ்நாடு முதலமைச்சர் தளபதி M. K. Stalin அவர்களின் நல்லாசியுடன்...",
+      desc: "கழகத் தலைவர், மாண்புமிகு தமிழ்நாடு முதலமைச்சர் தளபதி M.\u00A0K.\u00A0Stalin அவர்களின் நல்லாசியுடன்...",
     },
     {
       id: 2,
@@ -57,7 +57,7 @@ export default function Recentposts() {
       img: "https://scontent.fmaa14-1.fna.fbcdn.net/v/t39.30808-6/600291656_1447474846740090_5859908690971670026_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=COplOQp7gBUQ7kNvwFIrv3a&_nc_oc=AdmSkh_Qq-BkfePxEFxj7n6dO_RZTZwwdenh0EfcSS1nbiSAvEptwApvjTDmiZQZkBz70X39cNtoLcsREP25jm-l&_nc_zt=23&_nc_ht=scontent.fmaa14-1.fna&_nc_gid=ZmE18srYl2ckXVSTk_pdhw&oh=00_AfmRewS5uuSkZil2JbBaXfeqg3f0hFMO9lm4Qlt94P3ffQ&oe=695407A5",
       tag: "கரூர்",
       title: "கரூர் மாவட்ட கழக நிர்வாகிகள் ஆலோசனைக் கூட்டம்",
-      desc: "கழகத் தலைவர்,  மாண்புமிகு தமிழ்நாடு முதலமைச்சர் தளபதி M. K. Stalin அவர்களின் ஆணைக்கிணங்க...",
+      desc: "கழகத் தலைவர்,  மாண்புமிகு தமிழ்நாடு முதலமைச்சர் தளபதி M.\u00A0K.\u00A0Stalin அவர்களின் ஆணைக்கிணங்க...",
     },
     {
       id: 5,
@@ -71,7 +71,7 @@ export default function Recentposts() {
       img: "https://scontent.fmaa14-1.fna.fbcdn.net/v/t39.30808-6/601847906_1448081093346132_4650418602970348357_n.jpg?stp=dst-jpg_p180x540_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=RkMXCye98sQQ7kNvwGLBgOb&_nc_oc=AdmIGZ1esXlGfyY_NbO5npccwo7QkImw7lPNg9kUYEsevvhfn2tLpr5TPJSrb0ekULnY-e4iVjmE3Bfzgb3IRWVE&_nc_zt=23&_nc_ht=scontent.fmaa14-1.fna&_nc_gid=jZNKlK8tuciS8L0_xaUhTA&oh=00_AflOhLRGZ-A4tKQfCFYTqfokFIrgQqVMYVqN2dfNNMPesA&oe=69555BD7",
       tag: "பல்லடம்",
       title: "மகளிர் அணி மாநாட்டிற்கு பந்தல்கால் நடுவிழா",
-      desc: "கழகத் தலைவர் மாண்புமிகு தமிழ்நாடு முதலமைச்சர் தளபதி M. K. Stalin அவர்களின் ஆணைக்கிணங்க, வருகின்ற...",
+      desc: "கழகத் தலைவர் மாண்புமிகு தமிழ்நாடு முதலமைச்சர் தளபதி M.\u00A0K.\u00A0Stalin அவர்களின் ஆணைக்கிணங்க, வருகின்ற...",
     },
   ];
 

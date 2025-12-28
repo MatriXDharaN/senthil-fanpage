@@ -4,6 +4,7 @@ import Navbar from "./components/navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import GalleryPage from "./pages/Gallery-page/GalleryPage";
 import RecentPostPage from "./pages/recentpage/RecentPostPage";
+import Footer from "./pages/home/footer/Footer";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route path="/gallerypage" element={<GalleryPage />} />
         <Route path="/recentposts" element={<RecentPostPage />} />
       </Routes>
+
+      <Footer />
     </div>
   );
 }

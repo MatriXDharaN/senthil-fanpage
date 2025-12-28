@@ -276,14 +276,15 @@
 .card-content > p {
   color: var(--text-light);
   font-size: 0.95rem;
-  line-height: 1.6;
-  flex-grow: 1;
-  margin-bottom: 1rem;
+  line-height: 1.4;
+  max-height: calc(1.4em * 3); /* 👈 FIX */
+  overflow: hidden;
+
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }
+
 
 .view-more-btn {
   display: inline-flex;

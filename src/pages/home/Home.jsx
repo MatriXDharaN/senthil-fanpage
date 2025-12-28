@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
 import Heropage from "./heropage/Heropage";
-import Footer from "../../components/footer/Footer";
 import InstagramEmbed from "./../../components/InstagramEmbed/InstagramEmbed";
 import FacebookEmbed from "../../components/FacebookEmbed/FacebookEmbed";
 import XEmbed from "../../components/XEmbed/XEmbed";
@@ -114,8 +113,6 @@ const Home = () => {
           </div>
         )}
       </div>
-
-      <Footer />
     </div>
   );
 };
