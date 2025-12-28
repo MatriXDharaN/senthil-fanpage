@@ -7,7 +7,7 @@ const TestimonialSection = () => {
     role: "மாண்புமிகு தமிழ்நாடு முதலமைச்சர்",
     testimonial:
       "எளிமை, அர்ப்பணிப்பு மற்றும் விடாமுயற்சி ஆகிய பண்புகளில் ஒளி வீசும் அவரது சேவைகள், மக்களிடையே பெரிதும் பாராட்டை பெற்றுள்ளவர்",
-    imageUrl: "https://scontent.fcjb2-1.fna.fbcdn.net/v/t39.30808-6/589193019_1428350188652556_248347122337184624_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=9ML0PySjXuoQ7kNvwFIE0fp&_nc_oc=AdnsBNPx-5-SQMXSvFrefe9BykircnEdfJGGbgArIwxqjR91MCq3QDzmfOIol3xyIoKf2v4FLT-QfdRboJr1vVEK&_nc_zt=23&_nc_ht=scontent.fcjb2-1.fna&_nc_gid=1Lk-5jbg22RmrL8vyxIq7w&oh=00_AfkBNeh4z2GwP-sPRq45zT2zR2dH-23PS6z-0--McIG7Og&oe=6955ECA0",
+    imageUrl: "https://scontent-maa3-2.xx.fbcdn.net/v/t39.30808-6/589193019_1428350188652556_248347122337184624_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=9ML0PySjXuoQ7kNvwEIuaWi&_nc_oc=AdnQMHgprhWGMYKnLqnPpd_cr4V0Xi8y9Z6Y9bvyBoZJfuT-86f0CP_e83dpgPwjQew&_nc_zt=23&_nc_ht=scontent-maa3-2.xx&_nc_gid=I0XTJqpPsd5eGKDuqqEJrg&oh=00_Afn1xGPYTrX3pLC32MoHOSjqoEI6Fv-yeAeo5LtCJogQYA&oe=6956CDA0",
   };
 
   const leader2 = {

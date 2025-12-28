@@ -2,7 +2,6 @@ import "./App.css";
 import Home from "./pages/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Achievements from "./pages/achievement/Achievements";
 import GalleryPage from "./pages/Gallery-page/GalleryPage";
 import RecentPostPage from "./pages/recentpage/RecentPostPage";
 
@@ -13,7 +12,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/achievements" element={<Achievements />} />
         <Route path="/gallerypage" element={<GalleryPage />} />
         <Route path="/recentposts" element={<RecentPostPage />} />
       </Routes>

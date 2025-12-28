@@ -1,17 +1,23 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Recentposts.css";
 import img1 from "../../../assets/images/img1.jpg";
 import img2 from "../../../assets/images/img3.jpg";
 import img3 from "../../../assets/images/img9.jpg";
 import { NavLink } from "react-router-dom";
 
+/* Swiper */
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+/* Swiper styles */
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 export default function Recentposts() {
   const [statsDone, setStatsDone] = useState({});
-  const gridRef = useRef(null);
-  const statsObserverRef = useRef(null);
-  const cardWidth = 380;
 
-  // Stats data
+  /* ---------------- Stats ---------------- */
   const stats = [
     { number: "2L+", label: "இலவச விவசாய மின் இணைப்புகள்", target: "2L+" },
     { number: "50%", label: "புதுப்பிக்கத்தக்க ஆற்றல் இலக்கு", target: "50%" },
@@ -23,7 +29,7 @@ export default function Recentposts() {
     },
   ];
 
-  // Cards data
+  /* ---------------- Cards ---------------- */
   const cards = [
     {
       id: 1,
@@ -69,47 +75,7 @@ export default function Recentposts() {
     },
   ];
 
-  // Showcase slides
-  const showcaseSlides = [
-    {
-      img: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=900&q=80",
-      tag: "Farmers' Welfare",
-      text: "By providing 1.5 Lakh Free Power Connections in record time, we have powered the dreams of every farming family in Tamil Nadu.",
-      cite: "— TANGEDCO Record Achievement, 2024",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=900&q=80",
-      tag: "Transport Service",
-      text: "From introducing Small Buses to modernizing the state fleet, our goal is to make public transport accessible to every remote village.",
-      cite: "— Enhancing State Connectivity Initiative",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=80",
-      tag: "Consumer Welfare",
-      text: "The Minnagam (1912) Helpline ensures that every citizen's power complaint is resolved with just one phone call, day or night.",
-      cite: "— 24/7 Grievance Redressal System",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80",
-      tag: "Health & Public Aid",
-      text: "Organizing Mega Medical Camps in Karur and providing direct aid from the CM Relief Fund is our heartfelt commitment to the people.",
-      cite: "— Grassroots Healthcare Initiative",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80",
-      tag: "Digital Infrastructure",
-      text: "Implementing Smart Meters statewide ensures transparent billing and brings cutting-edge technology to every household's doorstep.",
-      cite: "— TNEB Modernization Program",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=900&q=80",
-      tag: "Constituency Development",
-      text: "From 1 Lakh Liter Water Tanks to paved roads in every panchayat, we are building a foundation of progress for Karur.",
-      cite: "— Karur Modernization Projects",
-    },
-  ];
-
-  // Counter animation
+  /* ---------------- Counter animation (unchanged) ---------------- */
   const animateCounter = useCallback(
     (index, target) => {
       let start = 0;
@@ -126,129 +92,45 @@ export default function Recentposts() {
           clearInterval(timer);
         }
 
-        if (target === 24) {
-          element.textContent = "24/7";
-        } else if (stats[index].target.includes("L")) {
+        if (target === 24) element.textContent = "24/7";
+        else if (stats[index].target.includes("L"))
           element.textContent = (start / 100000).toFixed(1) + "L+";
-        } else if (stats[index].target.includes("K")) {
+        else if (stats[index].target.includes("K"))
           element.textContent = (start / 1000).toFixed(1) + "K+";
-        } else if (stats[index].target.includes("%")) {
-          element.textContent = Math.floor(start) + "%";
-        }
+        else element.textContent = Math.floor(start) + "%";
       }, 16);
     },
     [stats]
   );
 
-  // Stats observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (
-            entry.isIntersecting &&
-            !statsDone[entry.target.dataset.statIndex]
-          ) {
-            const index = parseInt(entry.target.dataset.statIndex);
-            setStatsDone((prev) => ({ ...prev, [index]: true }));
-
-            const target = stats[index].target;
-            if (target === "24/7") {
-              animateCounter(index, 24);
-            } else if (target.includes("L")) {
-              animateCounter(index, 200000);
-            } else if (target.includes("K")) {
-              const num = parseFloat(target) * 1000;
-              animateCounter(index, num);
-            } else if (target.includes("%")) {
-              animateCounter(index, parseInt(target));
-            }
+          const i = entry.target.dataset.statIndex;
+          if (entry.isIntersecting && !statsDone[i]) {
+            setStatsDone((p) => ({ ...p, [i]: true }));
+            const t = stats[i].target;
+            if (t === "24/7") animateCounter(i, 24);
+            else if (t.includes("L")) animateCounter(i, 200000);
+            else if (t.includes("K")) animateCounter(i, parseFloat(t) * 1000);
+            else animateCounter(i, parseInt(t));
           }
         });
       },
       { threshold: 0.5 }
     );
 
-    statsObserverRef.current = observer;
-
-    document.querySelectorAll("[data-stat-index]").forEach((el) => {
-      observer.observe(el);
-    });
+    document
+      .querySelectorAll("[data-stat-index]")
+      .forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [statsDone, animateCounter, stats]);
-
-  // Card slider functions
-  const moveCards = useCallback(
-    (direction) => {
-      if (!gridRef.current) return;
-
-      const currentScroll = gridRef.current.scrollLeft;
-
-      if (direction === "right") {
-        gridRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
-
-        if (currentScroll + cardWidth >= cardWidth * cards.length) {
-          setTimeout(() => {
-            gridRef.current.style.scrollBehavior = "auto";
-            gridRef.current.scrollLeft = 0;
-            gridRef.current.style.scrollBehavior = "smooth";
-          }, 300);
-        }
-      } else {
-        if (currentScroll <= 0) {
-          gridRef.current.style.scrollBehavior = "auto";
-          gridRef.current.scrollLeft = cardWidth * cards.length;
-          gridRef.current.style.scrollBehavior = "smooth";
-        }
-        gridRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" });
-      }
-    },
-    [cardWidth, cards.length]
-  );
-
-  // Card auto-slide
-  useEffect(() => {
-    const interval = setInterval(() => {
-      moveCards("right");
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [moveCards]);
-
-  // Touch swipe support
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    const handleTouchStart = (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    };
-
-    const handleTouchEnd = (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 50) {
-        moveCards("right");
-      }
-      if (touchEndX - touchStartX > 50) {
-        moveCards("left");
-      }
-    };
-
-    grid.addEventListener("touchstart", handleTouchStart);
-    grid.addEventListener("touchend", handleTouchEnd);
-
-    return () => {
-      grid.removeEventListener("touchstart", handleTouchStart);
-      grid.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, []);
+  }, [animateCounter, stats, statsDone]);
 
   return (
     <div>
-      {/* Stats Overview */}
+      {/* -------- Stats -------- */}
       <section className="stats-overview">
         <div className="stats-grid">
           {stats.map((stat, i) => (
@@ -262,24 +144,36 @@ export default function Recentposts() {
         </div>
       </section>
 
-      {/* Card Slider Section */}
+      {/* -------- Swiper Card Slider -------- */}
       <section className="card-slider-section">
         <div className="slider-header">
           <h2 className="slider-head head-anim">தற்போதைய தகவல்கள்</h2>
         </div>
 
-        <div className="card-slider-container">
-          <button
-            className="card-btn prev-card"
-            aria-label="Previous"
-            onClick={() => moveCards("left")}
-          >
-            &#8249;
-          </button>
-
-          <div className="achievement-grid" id="infiniteGrid" ref={gridRef}>
-            {[...cards, ...cards].map((card, i) => (
-              <div key={i} className="stat-card">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          loop
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          spaceBetween={30}
+          centeredSlides={false}
+          breakpoints={{
+            0: {
+              slidesPerView: 1, // mobile
+            },
+            768: {
+              slidesPerView: 2, // tablet
+            },
+            1024: {
+              slidesPerView: 3, // desktop
+            },
+          }}
+          className="recentposts-swiper"
+        >
+          {cards.map((card) => (
+            <SwiperSlide key={card.id}>
+              <div className="stat-card">
                 <img src={card.img} alt={card.title} />
                 <div className="card-content">
                   <span className="card-tag">{card.tag}</span>
@@ -290,21 +184,13 @@ export default function Recentposts() {
                     to={`/recentposts?id=${card.id}`}
                     className="view-more-btn"
                   >
-                    <p>View More</p>
+                    View More
                   </NavLink>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <button
-            className="card-btn next-card"
-            aria-label="Next"
-            onClick={() => moveCards("right")}
-          >
-            &#8250;
-          </button>
-        </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
     </div>
   );

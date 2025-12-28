@@ -189,6 +189,7 @@
 }
 
 .stat-card {
+  height: 600px;
   flex: 0 0 350px;
   background: white;
   border-radius: 20px;
@@ -530,4 +531,45 @@ footer p {
   .card-content {
     padding: 20px;
   }
+}
+
+/* Swiper container width = card width */
+.recentposts-swiper {
+  max-width: 80%;
+  height: 80vh;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+/* Prevent slide shrink */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+/* Pagination dots color */
+.swiper-pagination-bullet {
+  background: var;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--primary-red);
+}
+
+.recentposts-swiper .swiper-button-prev,
+.recentposts-swiper .swiper-button-next {
+  width: 30px;
+  height: 30px;
+  background: rgba(211, 47, 47, 0.15);
+  border-radius: 50%;
+  color: #d32f2f;
+  transition: all 0.3s ease;
+  padding: .5rem;
+}
+
+.recentposts-swiper .swiper-button-prev:hover,
+.recentposts-swiper .swiper-button-next:hover {
+  background: #d32f2f;
+  color: #fff;
 }
