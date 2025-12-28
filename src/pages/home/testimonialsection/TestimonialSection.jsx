@@ -39,14 +39,6 @@ const TestimonialSection = () => {
       </div>
       <div className="testimonial-card horizontal">
         {/* LEFT : IMAGE */}
-        <div className="avatar-wrapper large">
-          <div className="avatar-glow"></div>
-          <img
-            src={leader2.imageUrl}
-            alt={leader2.name}
-            className="avatar-img"
-          />
-        </div>
 
         {/* RIGHT : CONTENT */}
         <div className="testimonial-right">
@@ -57,6 +49,14 @@ const TestimonialSection = () => {
             <p className="leader-role">- {leader2.role}</p>
             <span className="quote-end">”</span>
           </div>
+        </div>
+        <div className="avatar-wrapper large">
+          <div className="avatar-glow"></div>
+          <img
+            src={leader2.imageUrl}
+            alt={leader2.name}
+            className="avatar-img"
+          />
         </div>
       </div>
     </div>
